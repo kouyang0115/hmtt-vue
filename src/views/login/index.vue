@@ -73,6 +73,20 @@ export default {
         // valid代表是否整体校验成功
         if (valid) {
           // 进行登录操作
+          this.$http
+            .post(
+              "http://ttapi.research.itcast.cn/mp/v1_0/authorizations",
+              this.loginForm
+            )
+            .then(res => {
+              // res.data是后台返回的所有数据
+              // 成功 跳转首页
+              this.$router.push("/");
+            })
+            .catch(e => {
+              // 失败 提示 手机号或者验证码错误
+              this.$message.error("手机号或者验证码错误");
+            });
         }
       });
     }
